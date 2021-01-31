@@ -10,25 +10,35 @@ namespace Phamthitrmy_1721050372.Controllers
     public class BaitapController : Controller
     {
         XuLy xl = new XuLy();
+        public ActionResult Bai1()
+        {
+            return View();
+        }
+
+        [HttpPost]
+
         public ActionResult Bai1(string HeSoa, string HeSob, string HeSoc)
         {
             double a, b, c;
             a = Convert.ToDouble(HeSoa);
             b = Convert.ToDouble(HeSob);
             c = Convert.ToDouble(HeSoc);
+            if(a == 0)
+            {
+                ViewBag.Ketqua = "Hệ số A phải lớn hơn 0";
+                return View();
+            }
             double delta = b * b - 4 * a * c;
             double X1, X2;
             if (delta > 0)
             {
-                //Có hai nghiệm phân biệt
                 X1 = (-b + Math.Sqrt(delta)) / (2 * a);
                 X2 = (-b - Math.Sqrt(delta)) / (2 * a);
-                ViewBag.Ketqua = "Phương trình có hai nghiệm phân biệt:";
+                ViewBag.Ketqua = "Phương trình có hai nghiệm phân biệt: <br />";
                 ViewBag.Value = "x1 = " + X1 + ", x2 = " + X2;
             }
             else if (delta == 0)
             {
-                //Có nghiệm kép
                 X1 = X2 = -b / (2 * a);
                 ViewBag.Ketqua = "Phương trình có nghiệm kép:";
                 ViewBag.Value = "x1 = x2 = " + X2;
@@ -40,6 +50,13 @@ namespace Phamthitrmy_1721050372.Controllers
             return View();
 
         }
+        public ActionResult Bai2()
+        {
+            return View();
+        }
+
+        [HttpPost]
+
         public ActionResult Bai2(string son)
         {
             int n;
@@ -52,24 +69,28 @@ namespace Phamthitrmy_1721050372.Controllers
             ViewBag.Ketqua = "Tổng là :" + s;
             return View();
         }
+        public ActionResult Bai3()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Bai3(string sox)
         {
             double n;
             int tong = 0;
             n = Convert.ToDouble(sox);
-            List<int> soNguyenTo = new List<int>(); //Tao 1 danh sach de lấy các số nguyên tố nhỏ hơn số nhập vào
-            for (int i = 1; i < n; i++) //Chạy vòng lặp từ 1 đến n để lấy ra các số NT nhỏ hơn n
+            List<int> soNguyenTo = new List<int>();
+            for (int i = 1; i < n; i++)
             {
-                if (kiemtrasonguyento(i)) // Kiểm tra nếu số đó là số nguyên tố
+                if (kiemtrasonguyento(i))
                 {
-                    soNguyenTo.Add(i); // Thêm vào danh sách số nguyên tố nến số đó là số nguyên tố
+                    soNguyenTo.Add(i);
                 }
             }
 
-            foreach (int z in soNguyenTo) // Lấy từng số nguyên tố trong danh sách số nguyên tố
+            foreach (int z in soNguyenTo)
             {
-                //cộng từng phần tử vào biến tổng
                 int check = tong + z;
                 if (check <= 100)
                 {
@@ -100,6 +121,12 @@ namespace Phamthitrmy_1721050372.Controllers
                 return false;
             }
         }
+
+        public ActionResult Bai4()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Bai4(string sox)
         {
